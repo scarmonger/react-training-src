@@ -3,16 +3,22 @@ import Square from "./Square";
 
 function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
-  const [value, setValue] = useState("");
+  const [xIsNext, setXIsNext] = useState(true);
 
   function handleClick(i: number) {
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
     setSquares(nextSquares);
+    setXIsNext(!xIsNext);
   }
 
   return (
     <div className="board">
+      {/* {squares.map((square,index) => ( <Square value={squares[index]} onSquareClick={() => handleClick(index)} /> )} */}
       <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
       <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
       <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
